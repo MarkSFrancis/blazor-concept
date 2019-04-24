@@ -8,20 +8,18 @@
 
 Welcome to your new app.
 
-<div style="position: fixed;">Scroll Position: @ScrollX, @ScrollY</div>
+<div style="position: fixed;">Scroll Position: <text>{</text>@ScrollPosition.X, @ScrollPosition.Y<text>}</text></div>
 <div style="height: 200vh;background-color: #FFF"></div>
 
 @functions {
-    public int ScrollX = 0;
-    public int ScrollY = 0;
+    public Point ScrollPosition = new Point(0, 0);
 
     protected override async Task OnInitAsync()
     {
         await JsRuntime.InvokeAsync<object>("scrollManager.setup", new DotNetObjectRef(ScrollService));
 
         ScrollService.Scrolled += newPosition => {
-            ScrollX = newPosition.X;
-            ScrollY = newPosition.Y;
+            ScrollPosition = newPosition;
             StateHasChanged();
         };
     }
