@@ -18,7 +18,7 @@ Welcome to your new app.
 
     protected override async Task OnInitAsync()
     {
-        subscriptionId = await JsRuntime.InvokeAsync<int>("dotnetHelper.subscribe", new DotNetObjectRef(ScrollService), "SetScrollPosition", "(handler) => document.addEventListener('scroll', handler)", null, "e => [document.documentElement.scrollLeft, document.documentElement.scrollTop]");
+        subscriptionId = await JsRuntime.InvokeAsync<int>("dotnetHelper.subscribe", new DotNetObjectRef(ScrollService), "SetScrollPosition", "(handler) => document.addEventListener('scroll', handler)", "handler => document.removeEventListener('scroll', handler)", "e => [document.documentElement.scrollLeft, document.documentElement.scrollTop]");
 
         ScrollService.Scrolled += newPosition => {
             ScrollPosition = newPosition;
@@ -28,6 +28,6 @@ Welcome to your new app.
 
     public void Dispose()
     {
-        JsRuntime.InvokeAsync<object>("dotnetHelper.unsubscribe", subscriptionId).Wait();
+        JsRuntime.InvokeAsync<object>("dotnetHelper.unsubscribe", subscriptionId);
     }
 }

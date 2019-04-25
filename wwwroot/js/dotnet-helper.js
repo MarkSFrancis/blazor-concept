@@ -39,10 +39,11 @@ dotnetHelper = function () {
         var subscription = subscriptions.find(s => s.id === subscriptionId);
 
         if (subscription.unsubscribe) {
-            subscription.unsubscribe();
+            subscription.unsubscribe(subscription.handler);
         }
 
         subscriptions = subscriptions.filter(s => s.id !== subscriptionId);
+        console.log('Cleaned subscription');
     }
 
     return {
