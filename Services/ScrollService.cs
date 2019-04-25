@@ -26,9 +26,9 @@ namespace BlazorSampleApp.Services
         public event ScrollEvent Scrolled;
 
         [JSInvokable]
-        public void SetScrollPosition(int x, int y)
+        public void SetScrollPosition(int[] coords)
         {
-            ScrollPosition = new Point(x, y);
+            ScrollPosition = new Point(coords[0], coords[1]);
         }
     }
 }

@@ -3,6 +3,7 @@
 @inject BlazorSampleApp.Services.ScrollService ScrollService;
 @using Microsoft.JSInterop;
 @using System.Drawing;
+@implements IDisposable;
 
 <h1>Hello, world!</h1>
 
@@ -13,14 +14,20 @@ Welcome to your new app.
 
 @functions {
     public Point ScrollPosition = new Point(0, 0);
+    private int subscriptionId = 0;
 
     protected override async Task OnInitAsync()
     {
-        await JsRuntime.InvokeAsync<object>("scrollManager.setup", new DotNetObjectRef(ScrollService));
+        subscriptionId = await JsRuntime.InvokeAsync<int>("dotnetHelper.subscribe", new DotNetObjectRef(ScrollService), "SetScrollPosition", "(handler) => document.addEventListener('scroll', handler)", null, "e => [document.documentElement.scrollLeft, document.documentElement.scrollTop]");
 
         ScrollService.Scrolled += newPosition => {
             ScrollPosition = newPosition;
             StateHasChanged();
         };
+    }
+
+    public void Dispose()
+    {
+        JsRuntime.InvokeAsync<object>("dotnetHelper.unsubscribe", subscriptionId).Wait();
     }
 }
