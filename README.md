@@ -1,5 +1,7 @@
 # Blazor Concept
 
+A proof of concept and a playground for Client Side Blazor applications
+
 ## Features
 
 1. JsInterop sample with JS window events scrolling interop
