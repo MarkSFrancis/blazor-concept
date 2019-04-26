@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col">
+        @Text
+    </div>
+    <div class="col-auto ml-auto">
+        <input type="checkbox" onclick="@Complete" checked=@(CompletedOn != null) disabled=@(CompletedOn != null)></input>
+    </div>
+</div>
+
+@functions {
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public DateTime? CompletedOn { get; set; }
+
+    [Parameter]
+    public EventCallback OnComplete { get; set; }
+
+    public async Task Complete()
+    {
+        if (CompletedOn is null)
+        {
+            await OnComplete.InvokeAsync(null);
+        }
+    }
+}

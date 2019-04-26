@@ -47,7 +47,7 @@ namespace BlazorSampleApp.Api.Controllers
 
         // POST api/values
         [HttpPost, SaveOnSuccess]
-        public void Post([FromBody] TodoPostDtoModel model)
+        public ActionResult<TodoDataModel> Post([FromBody] TodoPostDtoModel model)
         {
             var newTodo = new TodoDataModel
             {
@@ -58,6 +58,8 @@ namespace BlazorSampleApp.Api.Controllers
             };
 
             Todos.Data.Add(newTodo);
+
+            return CreatedAtAction("Get", newTodo);
         }
 
         // PUT api/values/5

@@ -29,6 +29,13 @@
                     @PrintCurrent("fetchdata")
                 </NavLink>
             </li>
+            <li class="@PrintNavLinkClass("todo")">
+                <NavLink class="nav-link" href="todo" Match="NavLinkMatch.All">
+                    <span class="oi oi-list" aria-hidden="true"></span>
+                    Todo
+                    @PrintCurrent("todo")
+                </NavLink>
+            </li>
             <li class="@PrintNavLinkClass("github/profiles")">
                 <NavLink class="nav-link" href="github/profiles" Match="NavLinkMatch.All">
                     <span class="oi oi-grid-two-up" aria-hidden="true"></span>

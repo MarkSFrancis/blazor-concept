@@ -10,6 +10,7 @@ namespace BlazorSampleApp.UI
         {
             services.AddSingleton<ScrollService>();
             services.AddSingleton<GithubService>();
+            services.AddTransient<TodoService>();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

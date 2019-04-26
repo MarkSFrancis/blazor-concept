@@ -1,0 +1,61 @@
+@page "/todo"
+@using BlazorSampleApp.UI.Models;
+@inject BlazorSampleApp.UI.Services.TodoService TodoService;
+
+<EditForm Model="@AddTodoModel" OnValidSubmit="@AddTodo">
+        <DataAnnotationsValidator />
+        <ValidationsSummary />
+
+        <div class="form-group">
+            <label for="name">New todo</label>
+            <InputText id="name" class="form-control" bind-Value="@AddTodoModel.Text" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Add</button>
+</EditForm>
+
+@if(Todos != null && Todos.Count > 0)
+{
+    <ul class="list-group mt-3">
+        @foreach(var todo in Todos)
+        {
+            <li class="list-group-item">
+                <TodoItem Text="@todo.Text" CompletedOn="@todo.CompletedOn" OnComplete="@(() => MarkCompleted(todo.Id))"></TodoItem>
+            </li>
+        }
+    </ul>
+}
+else if (Todos is null)
+{
+    <div>Loading...</div>
+}
+
+@functions {
+    public List<TodoEntryDtoModel> Todos { get; set; }
+
+    public TodoEntryDtoModel AddTodoModel = new TodoEntryDtoModel();
+
+    protected override async Task OnInitAsync()
+    {
+        Todos = await TodoService.Get();
+    }
+
+    public async Task AddTodo()
+    {
+        var newTodo = await TodoService.Add(AddTodoModel);
+        Todos.Add(newTodo);
+        AddTodoModel = new TodoEntryDtoModel();
+    }
+
+    public async Task MarkCompleted(string id)
+    {
+        var matchingTodo = Todos.FirstOrDefault(t => t.Id == id);
+
+        if (matchingTodo is null)
+        {
+            throw new ArgumentException("Task \"" + id + "\" was not found");
+        }
+
+        await TodoService.Complete(matchingTodo);
+    }
+}
