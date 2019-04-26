@@ -30,11 +30,13 @@ namespace BlazorSampleApp.Api
             services.AddTransient(typeof(DataTable<>));
             services.AddTransient<Database>();
 
-            services.AddCors(opts => {
-                opts.AddDefaultPolicy(policy => {
+            services.AddCors(opts =>
+            {
+                opts.AddDefaultPolicy(policy =>
+                {
                     policy.AllowAnyHeader();
                     policy.AllowAnyMethod();
-                    policy.WithOrigins("https://localhost:5971/");
+                    policy.WithOrigins("http://localhost:5971");
                 });
             });
 
