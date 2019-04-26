@@ -43,7 +43,6 @@ dotnetHelper = function () {
         }
 
         subscriptions = subscriptions.filter(s => s.id !== subscriptionId);
-        console.log('Cleaned subscription');
     }
 
     return {
