@@ -1,8 +1,8 @@
-# Blazor Sample App
+# Blazor Concept
 
 ## Features
 
-1. JsInterop sample with scrolling feedback
+1. JsInterop sample with JS window events scrolling interop
 
 1. 3rd party APIs used with GitHub profiles
 
