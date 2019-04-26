@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace BlazorSampleApp
+namespace BlazorSampleApp.UI
 {
     public class Program
     {

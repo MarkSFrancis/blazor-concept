@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using Microsoft.JSInterop;
 
-namespace BlazorSampleApp.Services
+namespace BlazorSampleApp.UI.Services
 {
     public class ScrollService
     {

@@ -1,9 +1,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorSampleApp.Models;
+using BlazorSampleApp.UI.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorSampleApp.Services
+namespace BlazorSampleApp.UI.Services
 {
     public class GithubService
     {

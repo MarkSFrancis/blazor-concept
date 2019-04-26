@@ -1,4 +1,4 @@
-namespace BlazorSampleApp.Models
+namespace BlazorSampleApp.UI.Models
 {
     public class GithubProfileDtoModel
     {

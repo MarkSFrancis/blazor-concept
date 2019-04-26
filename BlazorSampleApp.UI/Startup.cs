@@ -1,8 +1,8 @@
-using BlazorSampleApp.Services;
+using BlazorSampleApp.UI.Services;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BlazorSampleApp
+namespace BlazorSampleApp.UI
 {
     public class Startup
     {
