@@ -30,6 +30,14 @@ namespace BlazorSampleApp.Api
             services.AddTransient(typeof(DataTable<>));
             services.AddTransient<Database>();
 
+            services.AddCors(opts => {
+                opts.AddDefaultPolicy(policy => {
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.WithOrigins("https://localhost:5971/");
+                });
+            });
+
             services.AddControllers()
                 .AddNewtonsoftJson();
         }
@@ -48,6 +56,8 @@ namespace BlazorSampleApp.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
