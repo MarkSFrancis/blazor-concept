@@ -7,16 +7,18 @@
 
 <h1>Github Profiles</h1>
 
-<EditForm Model="@AddProfileModel" OnValidSubmit="@AddProfile">
-    <DataAnnotationsValidator />
-    <ValidationsSummary />
+<div class="mb-3">
+    <EditForm Model="@AddProfileModel" OnValidSubmit="@AddProfile">
+        <DataAnnotationsValidator />
+        <ValidationsSummary />
 
-    <div class="form-group">
-        <InputText id="name" class="form-control" bind-Value="@AddProfileModel.Name" />
-    </div>
+        <div class="form-group">
+            <InputText id="name" class="form-control" bind-Value="@AddProfileModel.Name" />
+        </div>
 
-    <button class="btn btn-primary" type="submit">Add</button>
-</EditForm>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </EditForm>
+</div>
 
 @if(Profiles.Count > 0)
 {
