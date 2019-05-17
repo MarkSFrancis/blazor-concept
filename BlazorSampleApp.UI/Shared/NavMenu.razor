@@ -15,6 +15,13 @@
                 @PrintCurrent("")
                 </NavLink>
             </li>
+            <li class="@PrintNavLinkClass("sandbox")">
+                <NavLink class="nav-link" href="sandbox" Match="NavLinkMatch.All">
+                    <span class="oi oi-code" aria-hidden="true"></span>
+                    Sandbox
+                    @PrintCurrent("sandbox")
+                </NavLink>
+            </li>
             <li class="@PrintNavLinkClass("counter")">
                 <NavLink class="nav-link" href="counter" Match="NavLinkMatch.All">
                     <span class="oi oi-plus" aria-hidden="true"></span>
