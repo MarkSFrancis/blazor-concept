@@ -65,9 +65,9 @@
         UriHelper.OnLocationChanged += OnLocationChanged;
     }
 
-    private void OnLocationChanged(object sender, string newUriAbsolute)
+    private void OnLocationChanged(object sender, LocationChangedEventArgs newUriAbsolute)
     {
-        url = UriHelper.ToBaseRelativePath(BaseUri, newUriAbsolute);
+        url = UriHelper.ToBaseRelativePath(BaseUri, newUriAbsolute.Location);
         StateHasChanged();
     }
 

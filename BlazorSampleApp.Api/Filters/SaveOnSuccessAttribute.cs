@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using BlazorSampleApp.Api;
 
 namespace BlazorSampleApp.Api.Filters
 {

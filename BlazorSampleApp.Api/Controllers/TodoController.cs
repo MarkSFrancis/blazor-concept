@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BlazorSampleApp.Api.Filters;
 using BlazorSampleApp.Api.Models.Data;
 using BlazorSampleApp.Api.Models.Dto;

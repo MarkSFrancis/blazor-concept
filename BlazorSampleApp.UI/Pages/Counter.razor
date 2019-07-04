@@ -1,16 +1,30 @@
 ﻿@page "/counter"
+@using Models;
 
 <h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
+<EditForm Model="@Model">
+    <div class="form-group">
+        <label>Increment By</label>
+        <InputNumber Class="form-control" @bind-Value="Model.IncrementAmount" />
+    </div>
+</EditForm>
 
-<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="@IncrementCount">Increment</button>
+
+<hr />
+
+<p>Current count: @currentCount</p>
 
 @functions {
     int currentCount = 0;
+    CounterModel Model = new CounterModel
+    {
+        IncrementAmount = 1
+    };
 
     void IncrementCount()
     {
-        currentCount++;
+        currentCount += Model.IncrementAmount;
     }
 }

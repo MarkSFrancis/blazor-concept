@@ -1,13 +1,18 @@
 ﻿@page "/"
 @inject IJSRuntime JsRuntime;
 @inject BlazorSampleApp.UI.Services.ScrollService ScrollService;
+@using BlazorSampleApp.UI.Services;
 @using Microsoft.JSInterop;
 @using System.Drawing;
 @implements IDisposable;
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<p class="lead">
+    Welcome to your new 
+    <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/blazor">ASP.NET Core Components</a> 
+    app.
+</p>
 
 <div style="position:sticky;top:0;">Scroll Position: <text>{</text>@ScrollPosition.X, @ScrollPosition.Y<text>}</text></div>
 <div style="height: 200vh;background-color: #FFF"></div>
@@ -18,7 +23,7 @@ Welcome to your new app.
 
     protected override async Task OnInitAsync()
     {
-        subscriptionId = await JsRuntime.InvokeAsync<int>("dotnetHelper.subscribe", new DotNetObjectRef(ScrollService), "SetScrollPosition", "(handler) => document.addEventListener('scroll', handler)", "handler => document.removeEventListener('scroll', handler)", "e => [document.documentElement.scrollLeft, document.documentElement.scrollTop]");
+        subscriptionId = await JsRuntime.InvokeAsync<int>("dotnetHelper.subscribe", DotNetObjectRef.Create<ScrollService>(ScrollService), "SetScrollPosition", "(handler) => document.addEventListener('scroll', handler)", "handler => document.removeEventListener('scroll', handler)", "e => [document.documentElement.scrollLeft, document.documentElement.scrollTop]");
 
         ScrollService.Scrolled += newPosition => {
             ScrollPosition = newPosition;

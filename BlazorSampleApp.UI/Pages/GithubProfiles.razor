@@ -13,7 +13,7 @@
         <ValidationsSummary />
 
         <div class="form-group">
-            <InputText id="name" class="form-control" bind-Value="@AddProfileModel.Name" />
+            <InputText id="name" class="form-control" @bind-Value="AddProfileModel.Name" placeholder="GitHubUsername" />
         </div>
 
         <button class="btn btn-primary" type="submit">Add</button>
@@ -33,7 +33,7 @@
                         <p class="card-text">@profile.Bio</p>
                         <div class="mt-auto">
                             <a target="_blank" href="@profile.Html_url" class="btn btn-primary">View on GitHub</a>
-                            <button class="btn btn-danger" onclick="@(() => RemoveProfile(profile.Id))">Remove</button>
+                            <button class="btn btn-danger" @onclick="@(() => RemoveProfile(profile.Id))">Remove</button>
                         </div>
                     </div>
                 </div>

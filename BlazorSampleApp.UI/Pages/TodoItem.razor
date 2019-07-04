@@ -3,7 +3,7 @@
         @Text
     </div>
     <div class="col-auto ml-auto">
-        <input type="checkbox" onclick="@Complete" checked=@(CompletedOn != null) disabled=@(CompletedOn != null)></input>
+        <input type="checkbox" @onclick="@Complete" checked=@(CompletedOn != null) disabled=@(CompletedOn != null) />
     </div>
 </div>
 

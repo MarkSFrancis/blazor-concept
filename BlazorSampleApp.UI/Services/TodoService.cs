@@ -1,40 +1,45 @@
+using BlazorSampleApp.UI.Configuration;
+using BlazorSampleApp.UI.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorSampleApp.UI.Models;
-using Microsoft.AspNetCore.Components;
 
 namespace BlazorSampleApp.UI.Services
 {
     public class TodoService
     {
-        private const string ApiUrl = "https://localhost:5594/api/";
-
-        public TodoService(HttpClient http)
+        public TodoService(HttpClient http, ConfigService config)
         {
             Http = http;
-            Http.BaseAddress = new Uri(ApiUrl);
+            Config = config;
         }
 
         public HttpClient Http { get; }
+        public ConfigService Config { get; }
 
         public async Task<List<TodoEntryDtoModel>> Get()
         {
-            var results = await Http.GetJsonAsync<List<TodoEntryDtoModel>>("todo");
+            List<TodoEntryDtoModel> results = await Http.GetJsonAsync<List<TodoEntryDtoModel>>(await GetApiPath("todo"));
             return results;
         }
 
         public async Task<TodoEntryDtoModel> Add(TodoEntryDtoModel todo)
         {
-            return await Http.PostJsonAsync<TodoEntryDtoModel>("todo", todo);
+            if (todo.CreatedOn == default)
+            {
+                todo.CreatedOn = DateTime.UtcNow;
+            }
+
+            return await Http.PostJsonAsync<TodoEntryDtoModel>(await GetApiPath("todo"), todo);
         }
 
         public async Task Complete(string id, DateTime completedOn)
         {
-            await Http.SendJsonAsync(new HttpMethod("PATCH"), "todo/" + id, new
+            await Http.SendJsonAsync(new HttpMethod("PATCH"), await GetApiPath("todo/" + id), new
             {
-                CompletedOn = DateTime.UtcNow
+                CompletedOn = completedOn
             });
         }
 
@@ -42,6 +47,15 @@ namespace BlazorSampleApp.UI.Services
         {
             todo.CompletedOn = DateTime.UtcNow;
             await Complete(todo.Id, todo.CompletedOn.Value);
+        }
+
+        private async Task<string> GetApiPath(string relativePath)
+        {
+            Config config = await Config.GetAsync();
+
+            var apiUrl = config.Uris.Api;
+
+            return apiUrl + relativePath;
         }
     }
 }
