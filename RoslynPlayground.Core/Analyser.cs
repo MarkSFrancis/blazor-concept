@@ -11,16 +11,16 @@ namespace RoslynSandbox.Core
 {
     public class Analyser : IAnalyser
     {
-        public Analyser(Sandbox workspace)
+        public Analyser(PlaygroundWorkspace workspace)
         {
             Workspace = workspace;
 
-            _autoComplete = new AutoCompleteService(workspace);
+            _autoComplete = new AutoCompleteWorkspaceService(workspace);
         }
 
-        public Sandbox Workspace { get; }
+        public PlaygroundWorkspace Workspace { get; }
 
-        private readonly AutoCompleteService _autoComplete;
+        private readonly AutoCompleteWorkspaceService _autoComplete;
 
         public Task<CompilerResult> CompileAsync()
         {

@@ -1,13 +1,17 @@
-﻿namespace RoslynSandbox.Core
+﻿using System;
+
+namespace RoslynSandbox.Core
 {
     public static class StringExtensions
     {
-        public const string WindowsNewLine = "\r\n";
-        public const string UnixNewLine = "\n";
-
-        public static string ToUnixString(this string str)
+        public static string[] Split(this string str, string separator, StringSplitOptions options)
         {
-            return str.Replace(WindowsNewLine, UnixNewLine);
+            return str.Split(new[] { separator }, options);
+        }
+
+        public static string[] Split(this string str, string separator)
+        {
+            return str.Split(separator, StringSplitOptions.None);
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RoslynSandbox.Core.Diagnostics
 {
-    public static class DiagnosticService
+    public static class DiagnosticsExtensions
     {
-        public static async Task<IReadOnlyCollection<Diagnostic>> GetDiagnosticsAsync(this Sandbox workspace)
+        public static async Task<IReadOnlyCollection<Diagnostic>> GetDiagnosticsAsync(this PlaygroundWorkspace workspace)
         {
             if (workspace is null)
             {

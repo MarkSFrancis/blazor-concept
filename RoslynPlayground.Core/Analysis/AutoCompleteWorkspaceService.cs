@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace RoslynSandbox.Core.Analysis
 {
-    public class AutoCompleteService : IDisposable
+    public class AutoCompleteWorkspaceService : IDisposable
     {
-        public AutoCompleteService(Sandbox workspace)
+        public AutoCompleteWorkspaceService(PlaygroundWorkspace workspace)
         {
             Workspace = workspace ?? throw new ArgumentNullException(nameof(workspace));
 
             Workspace.EditingDocumentChanged += WorkspaceEditingDocumentChanged;
 
             WorkspaceEditingDocumentChanged(
-                null, 
+                null,
                 new EditingDocumentChangedEventArgs(Workspace.EditingFile, Workspace.EditingDocument)
             );
         }
@@ -31,7 +31,7 @@ namespace RoslynSandbox.Core.Analysis
 
         private CompletionService _completionService;
 
-        public Sandbox Workspace { get; }
+        public PlaygroundWorkspace Workspace { get; }
 
         public async Task<IEnumerable<CompletionItem>> GetAutoCompleteAsync()
         {

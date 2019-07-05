@@ -11,7 +11,7 @@ namespace RoslynSandbox.Core.Code
                 throw new ArgumentOutOfRangeException(nameof(position));
             }
 
-            var rows = text.Split(new[] { StringExtensions.UnixNewLine }, StringSplitOptions.None);
+            var rows = text.Split(UnixStringExtensions.UnixNewLine);
 
             int passedCharsCount = 0;
             int rowIndex = 0;
@@ -25,7 +25,7 @@ namespace RoslynSandbox.Core.Code
                     return (rowIndex + 1, indexInRow + 1);
                 }
 
-                passedCharsCount += rowSize + StringExtensions.UnixNewLine.Length;
+                passedCharsCount += rowSize + UnixStringExtensions.UnixNewLine.Length;
                 rowIndex++;
             }
 

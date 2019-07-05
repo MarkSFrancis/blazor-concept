@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace RoslynSandbox.Core.Workspace
 {
-    public class Sandbox
+    public class PlaygroundWorkspace
     {
-        public Sandbox(
+        public PlaygroundWorkspace(
             SourceCodeKind workspaceType,
             IReadOnlyCollection<SourceFile> files)
         {
@@ -41,7 +41,7 @@ namespace RoslynSandbox.Core.Workspace
             (ActiveProject, EditingDocument) = LoadProject();
         }
 
-        public Sandbox(
+        public PlaygroundWorkspace(
             SourceCodeKind workspaceType,
             params SourceFile[] files) : this(workspaceType, (IReadOnlyCollection<SourceFile>)files)
         {
@@ -62,7 +62,6 @@ namespace RoslynSandbox.Core.Workspace
         private (Project project, Document editingDocument) LoadProject()
         {
             var newWorkspace = new AdhocWorkspace();
-
             var solution = SolutionInfo.Create(SolutionId.CreateNewId("sandbox"), VersionStamp.Default);
             newWorkspace.AddSolution(solution);
 
@@ -104,13 +103,13 @@ namespace RoslynSandbox.Core.Workspace
             return (project, editingDocument);
         }
 
-        public static Sandbox FromSource(
+        public static PlaygroundWorkspace FromSource(
             SourceCodeKind workspaceType,
             string source,
             int? editorPosition = null,
             string filename = "Program.cs")
         {
-            return new Sandbox(workspaceType, new SourceFile(filename, source, editorPosition));
+            return new PlaygroundWorkspace(workspaceType, new SourceFile(filename, source, editorPosition));
         }
 
         private void FileToLoadEditorPositionChanged(object sender, EditorPositionChangedEventArgs e)
