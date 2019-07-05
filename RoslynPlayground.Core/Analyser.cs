@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.Completion;
 using RoslynSandbox.Core.Analysis;
 using RoslynSandbox.Core.Compiler;
 using RoslynSandbox.Core.Diagnostics;
+using RoslynSandbox.Core.Tokens;
 using RoslynSandbox.Core.Workspace;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -25,6 +26,11 @@ namespace RoslynSandbox.Core
         public Task<CompilerResult> CompileAsync()
         {
             return Workspace.CompileAsync();
+        }
+
+        public Task<IEnumerable<Token>> GetTokensAsync()
+        {
+            return Workspace.GetTokensAsync();
         }
 
         public Task<IEnumerable<CompletionItem>> GetAutoCompleteAsync()

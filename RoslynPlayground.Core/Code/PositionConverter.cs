@@ -11,11 +11,11 @@ namespace RoslynSandbox.Core.Code
                 throw new ArgumentOutOfRangeException(nameof(position));
             }
 
-            var rows = text.Split(UnixStringExtensions.UnixNewLine);
+            var rows = text.Split(new[] { UnixStringExtensions.UnixNewLine }, StringSplitOptions.None);
 
             int passedCharsCount = 0;
             int rowIndex = 0;
-            while(rowIndex < rows.Length)
+            while (rowIndex < rows.Length)
             {
                 var indexInRow = position - passedCharsCount;
                 var rowSize = rows[rowIndex].Length;

@@ -1,7 +1,43 @@
+@using Models;
+@using Microsoft.CodeAnalysis;
+@using RoslynSandbox.Core;
+@using RoslynSandbox.Core.Workspace;
+@using RoslynSandbox.Core.Compiler;
 @page "/sandbox"
 
 <h1>Sandbox</h1>
-<p class="lead">todo</p>
+<p class="lead">This page is currently under construction, and <span class="text-warning">does not work</span> because Blazor has not implemented scanning assemblies for exports</p>
+
+<EditForm Model="CodeData" OnValidSubmit="@Run">
+    <div class="form-group">
+        <InputTextArea @bind-Value="CodeData.Code" Class="form-control code-input"></InputTextArea>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Execute</button>
+</EditForm>
+
+<hr />
+<p class="lead">Build Output</p>
+<pre>
+
+</pre>
 
 @functions {
+    public CodeModel CodeData { get; set; } = new CodeModel
+    {
+        Code = @"
+using System;
+Console.WriteLine(""Hello World!"");
+"
+    };
+
+    async Task Run()
+    {
+        var workspace = PlaygroundWorkspace.FromSource(SourceCodeKind.Script, CodeData.Code, 26);
+
+        using (var analyser = new Analyser(workspace))
+        {
+            await analyser.CompileAndRunScript();
+        }
+    }
 }

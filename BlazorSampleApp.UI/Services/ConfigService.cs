@@ -10,6 +10,7 @@ namespace BlazorSampleApp.UI.Services
     {
         public ConfigService(HttpClient client)
         {
+            _ = typeof(Microsoft.CodeAnalysis.CSharp.Formatting.CSharpFormattingOptions);
             _client = client;
         }
 

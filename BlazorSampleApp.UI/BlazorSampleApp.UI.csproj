@@ -8,6 +8,7 @@
     </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,14 @@
   <ItemGroup>
     <!-- extends watching group to include *.js files -->
     <Watch Include="**\*.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\monaco-editor\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoslynPlayground.Core\RoslynSandbox.Core.csproj" />
   </ItemGroup>
 
 </Project>

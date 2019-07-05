@@ -1,6 +1,4 @@
-﻿@import url("open-iconic/font/css/open-iconic-bootstrap.min.css");
-
-html,
+﻿html,
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.6;
@@ -9,4 +7,8 @@ body {
 main {
   padding-top: 1.1rem;
   padding-bottom: 1.1rem;
+}
+
+.code-input {
+    min-height: 70vh;
 }

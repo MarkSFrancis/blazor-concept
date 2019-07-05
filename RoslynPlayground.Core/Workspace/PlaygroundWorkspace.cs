@@ -16,7 +16,7 @@ namespace RoslynSandbox.Core.Workspace
             files = files ?? Array.Empty<SourceFile>();
 
             var myFiles = new List<SourceFile>(files.Count);
-            foreach (var file in files)
+            foreach (SourceFile file in files)
             {
                 if (file.EditorPosition.HasValue)
                 {
@@ -61,7 +61,8 @@ namespace RoslynSandbox.Core.Workspace
 
         private (Project project, Document editingDocument) LoadProject()
         {
-            var newWorkspace = new AdhocWorkspace();
+            var adhocWorkspace = new AdhocWorkspace();
+            var newWorkspace = adhocWorkspace;
             var solution = SolutionInfo.Create(SolutionId.CreateNewId("sandbox"), VersionStamp.Default);
             newWorkspace.AddSolution(solution);
 
@@ -71,7 +72,6 @@ namespace RoslynSandbox.Core.Workspace
                 "sandbox",
                 "sandbox",
                 LanguageNames.CSharp,
-                metadataReferences: ReferenceBuilder.GetReferences(),
                 compilationOptions: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
             );
 
@@ -79,7 +79,7 @@ namespace RoslynSandbox.Core.Workspace
 
             Document editingDocument = null;
 
-            foreach (var fileToLoad in Files)
+            foreach (SourceFile fileToLoad in Files)
             {
                 fileToLoad.EditorPositionChanged += FileToLoadEditorPositionChanged;
 
@@ -90,7 +90,7 @@ namespace RoslynSandbox.Core.Workspace
                     sourceCodeKind: WorkspaceType
                 );
 
-                var document = newWorkspace.AddDocument(documentToLoad);
+                Document document = newWorkspace.AddDocument(documentToLoad);
 
                 if (fileToLoad.EditorPosition.HasValue)
                 {
@@ -98,7 +98,7 @@ namespace RoslynSandbox.Core.Workspace
                 }
             }
 
-            var project = newWorkspace.CurrentSolution.GetProject(projectInfo.Id);
+            Project project = newWorkspace.CurrentSolution.GetProject(projectInfo.Id);
 
             return (project, editingDocument);
         }
